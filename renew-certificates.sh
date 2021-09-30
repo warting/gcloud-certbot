@@ -18,12 +18,12 @@ service_domain_names=$(gcloud app services list --format "get(id)" | sed "s/\(.*
 echo certbot command: certbot certonly -n \
   -m "${LETSENCRYPT_CONTACT_EMAIL}" --agree-tos \
   --preferred-challenges dns ${dns_provider_options} \
-  -d "*.${CUSTOM_DOMAIN}" -d "${CUSTOM_DOMAIN}" ${service_domain_names}
+  -d "*.${CUSTOM_DOMAIN}" #-d "${CUSTOM_DOMAIN}" ${service_domain_names}
 
 certbot certonly -n \
   -m "${LETSENCRYPT_CONTACT_EMAIL}" --agree-tos \
   --preferred-challenges dns ${dns_provider_options} \
-  -d "*.${CUSTOM_DOMAIN}" -d "${CUSTOM_DOMAIN}" ${service_domain_names}
+  -d "*.${CUSTOM_DOMAIN}" # -d "${CUSTOM_DOMAIN}" ${service_domain_names}
 
 echo "Convert private key into RSA format"
 openssl rsa \
