@@ -35,7 +35,7 @@ echo "Backup of letsencrypt context"
 gsutil -m rsync -r /etc/letsencrypt "${LETSENCRYPT_BUCKET}"
 
 echo "Install certificate on App Engine"
-certificate_id=$(gcloud app ssl-certificates list --format "get(id,display_name)" | grep -F "${CUSTOM_DOMAIN}" | head -n 1 | cut -f 1 || true)
+certificate_id=24364635
 echo "Found existing certificate : ${certificate_id}"
 
 if [ "${certificate_id}" = "" ]; then
