@@ -9,7 +9,7 @@ COPY certbot-repo/CHANGELOG.md certbot-repo/README.rst src/
 # We keep the relative path to the requirements file the same because, as of
 # writing this, tools/pip_install.py is used in the Dockerfile for Certbot
 # plugins and this script expects to find the requirements file there.
-COPY certbot-repo/letsencrypt-auto-source/pieces/dependency-requirements.txt letsencrypt-auto-source/pieces/
+#COPY certbot-repo/letsencrypt-auto-source/pieces/dependency-requirements.txt letsencrypt-auto-source/pieces/
 COPY certbot-repo/tools tools
 COPY certbot-repo/acme src/acme
 COPY certbot-repo/certbot src/certbot
@@ -44,7 +44,7 @@ RUN python tools/pip_install.py --no-cache-dir \
       --editable /opt/certbot/src/certbot-dns-nsone
 
 # Overide google api version to fix Metadata collection on Cloud Run
-RUN pip uninstall crcmod && pip install --no-cache-dir -U crcmod google-api-python-client==1.11.0
+RUN pip install --no-cache-dir -U crcmod google-api-python-client==1.11.0
 
 WORKDIR /
 
