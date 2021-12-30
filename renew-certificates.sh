@@ -38,18 +38,36 @@ echo "Install certificate on App Engine"
 certificate_id=24364635
 echo "Found existing certificate : ${certificate_id}"
 
+
+
 echo ""
-echo "CERTIFICATE"
-echo "----"
+echo "CERTIFICATE LOGGED 1"
+echo "/etc/letsencrypt/live/${CUSTOM_DOMAIN}/fullchain.pem"
+echo ""
 cat /etc/letsencrypt/live/${CUSTOM_DOMAIN}/fullchain.pem
-echo ""
+echo "🏁"
 echo ""
 
 echo ""
-echo "PRIVATE KEY"
-echo "----"
-cat /etc/letsencrypt/live/${CUSTOM_DOMAIN}/privkey-rsa.pem
+echo "PRIVATE KEY LOGGED 1"
+echo "/etc/letsencrypt/live/${CUSTOM_DOMAIN}/privkey-rsa.pem"
 echo ""
+cat /etc/letsencrypt/live/${CUSTOM_DOMAIN}/privkey-rsa.pem
+echo "🏁"
+echo ""
+
+echo ""
+echo "CERTIFICATE LOGGED 2"
+echo ""
+cat /etc/letsencrypt/live/shopinzon.com-0005/fullchain.pem
+echo "🏁"
+echo ""
+
+echo ""
+echo "PRIVATE KEY LOGGED 2"
+echo ""
+cat /etc/letsencrypt/live/shopinzon.com-0005/privkey.pem
+echo "🏁"
 echo ""
 
 
