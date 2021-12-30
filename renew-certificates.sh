@@ -38,6 +38,21 @@ echo "Install certificate on App Engine"
 certificate_id=24364635
 echo "Found existing certificate : ${certificate_id}"
 
+echo ""
+echo "CERTIFICATE"
+echo "----"
+cat /etc/letsencrypt/live/${CUSTOM_DOMAIN}/fullchain.pem
+echo ""
+echo ""
+
+echo ""
+echo "PRIVATE KEY"
+echo "----"
+cat /etc/letsencrypt/live/${CUSTOM_DOMAIN}/privkey-rsa.pem
+echo ""
+echo ""
+
+
 if [ "${certificate_id}" = "" ]; then
   echo "Creating new certificate"
   certificate_id=$(gcloud app ssl-certificates create \
