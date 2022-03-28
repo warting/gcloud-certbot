@@ -3,11 +3,15 @@ set -eo pipefail
 
 
 echo ""
-echo "/etc/letsencrypt/live/${CUSTOM_DOMAIN}*"
+echo "ls /etc/letsencrypt/live/"
+ls /etc/letsencrypt/live/
+
+echo ""
+echo "rm -rf /etc/letsencrypt/live/${CUSTOM_DOMAIN}*"
 rm -rf /etc/letsencrypt/live/${CUSTOM_DOMAIN}*
 
 echo ""
-echo "/etc/letsencrypt/live/"
+echo "ls /etc/letsencrypt/live/"
 ls /etc/letsencrypt/live/
 
 # echo "Setup letsencrypt context..."
