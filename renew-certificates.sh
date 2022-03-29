@@ -18,12 +18,12 @@ if [ "${DNS_PROVIDER}" != "route53" ] && [ "${DNS_PROVIDER}" != "google" ]; then
   dns_provider_options="${dns_provider_options} --dns-${DNS_PROVIDER}-credentials /dns_api_key.ini"
 fi
 
-echo certbot command: certbot certonly -n \
+echo certbot command: certbot certonly -v -n \
   -m "${LETSENCRYPT_CONTACT_EMAIL}" --agree-tos \
   --preferred-challenges dns ${dns_provider_options} \
   -d "*.${CUSTOM_DOMAIN}"
 
-certbot certonly -n \
+certbot certonly -v -n \
   -m "${LETSENCRYPT_CONTACT_EMAIL}" --agree-tos \
   --preferred-challenges dns ${dns_provider_options} \
   -d "*.${CUSTOM_DOMAIN}"
