@@ -6,9 +6,9 @@ echo "Setup letsencrypt context..."
 
 gsutil -m rsync -r "${LETSENCRYPT_BUCKET}" /etc/letsencrypt
 
-echo "Cleaning up..."
-echo "rm -rf /etc/letsencrypt/*"
-rm -rf /etc/letsencrypt/*
+# echo "Cleaning up..."
+# echo "rm -rf /etc/letsencrypt/*"
+# rm -rf /etc/letsencrypt/*
 
 echo "Renewing certificate..."
 
