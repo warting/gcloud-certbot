@@ -1,0 +1,5 @@
+{
+	"dependencies": {
+		"graph-fs": "^0.0.16"
+	}
+}
