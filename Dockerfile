@@ -6,10 +6,10 @@ RUN mv /usr/bin/python /usr/bin/python2 && ln -s /usr/bin/python3 /usr/bin/pytho
 # Copy certbot code
 WORKDIR /opt/certbot
 COPY certbot-repo/CHANGELOG.md certbot-repo/README.rst		src/
+
 # We keep the relative path to the requirements file the same because, as of
 # writing this, tools/pip_install.py is used in the Dockerfile for Certbot
 # plugins and this script expects to find the requirements file there.
-#COPY certbot-repo/letsencrypt-auto-source/pieces/dependency-requirements.txt letsencrypt-auto-source/pieces/
 COPY certbot-repo/tools		tools
 COPY certbot-repo/acme		src/acme
 COPY certbot-repo/certbot	src/certbot

@@ -2,41 +2,39 @@
 set -eo pipefail
 
 
-echo "Setup letsencrypt context..."
+# echo "Setup letsencrypt context..."
 
-gsutil -m rsync -r "${LETSENCRYPT_BUCKET}" /etc/letsencrypt
+# gsutil -m rsync -r "${LETSENCRYPT_BUCKET}" /etc/letsencrypt
 
-# echo "Cleaning up..."
-# echo "rm -rf /etc/letsencrypt/*"
-# rm -rf /etc/letsencrypt/*
+echo "Renewing certificate..."
 
-# echo "Renewing certificate..."
+dns_provider_options="--dns-${DNS_PROVIDER}"
+if [ "${DNS_PROVIDER}" != "route53" ] && [ "${DNS_PROVIDER}" != "google" ]; then
+  echo -e "${DNS_PROVIDER_CREDENTIALS}" > /dns_api_key.ini
+  dns_provider_options="${dns_provider_options} --dns-${DNS_PROVIDER}-credentials /dns_api_key.ini"
+fi
 
-# dns_provider_options="--dns-${DNS_PROVIDER}"
-# if [ "${DNS_PROVIDER}" != "route53" ] && [ "${DNS_PROVIDER}" != "google" ]; then
-#   echo -e "${DNS_PROVIDER_CREDENTIALS}" > /dns_api_key.ini
-#   dns_provider_options="${dns_provider_options} --dns-${DNS_PROVIDER}-credentials /dns_api_key.ini"
-# fi
+echo certbot certonly -v -n \
+  -m "${LETSENCRYPT_CONTACT_EMAIL}" --agree-tos \
+  --preferred-challenges dns ${dns_provider_options} \
+  -d "*.${CUSTOM_DOMAIN}"
 
-# echo certbot command: certbot certonly -v -n \
-#   -m "${LETSENCRYPT_CONTACT_EMAIL}" --agree-tos \
-#   --preferred-challenges dns ${dns_provider_options} \
-#   -d "*.${CUSTOM_DOMAIN}"
+certbot certonly -v -n \
+  -m "${LETSENCRYPT_CONTACT_EMAIL}" --agree-tos \
+  --preferred-challenges dns ${dns_provider_options} \
+  -d "*.${CUSTOM_DOMAIN}"
 
-# certbot certonly -v -n \
-#   -m "${LETSENCRYPT_CONTACT_EMAIL}" --agree-tos \
-#   --preferred-challenges dns ${dns_provider_options} \
-#   -d "*.${CUSTOM_DOMAIN}"
+echo openssl rsa \
+  -in "/etc/letsencrypt/live/${CUSTOM_DOMAIN}/privkey.pem" \
+  -out "/etc/letsencrypt/live/${CUSTOM_DOMAIN}/privkey-rsa.pem" \
 
-# echo "Convert private key into RSA format"
-# openssl rsa \
-#   -in "/etc/letsencrypt/live/${CUSTOM_DOMAIN}/privkey.pem" \
-#   -out "/etc/letsencrypt/live/${CUSTOM_DOMAIN}/privkey-rsa.pem" \
+openssl rsa \
+  -in "/etc/letsencrypt/live/${CUSTOM_DOMAIN}/privkey.pem" \
+  -out "/etc/letsencrypt/live/${CUSTOM_DOMAIN}/privkey-rsa.pem" \
 
 
 # echo "Backup of letsencrypt context"
 # gsutil -m rsync -r /etc/letsencrypt "${LETSENCRYPT_BUCKET}"
-
 
 echo ""
 echo "CERTIFICATE"
