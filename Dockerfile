@@ -1,7 +1,11 @@
 FROM google/cloud-sdk:373.0.0
 
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+    python3.8 python3-pip python3.8-dev
+    
 # use python 3 by default
-RUN mv /usr/bin/python /usr/bin/python2 && ln -s /usr/bin/python3 /usr/bin/python && ln -s /usr/bin/pip3 /usr/bin/pip
+# RUN mv /usr/bin/python /usr/bin/python2 && ln -s /usr/bin/python3 /usr/bin/python && ln -s /usr/bin/pip3 /usr/bin/pip
 
 # Copy certbot code
 WORKDIR /opt/certbot
