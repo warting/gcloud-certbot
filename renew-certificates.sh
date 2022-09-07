@@ -51,7 +51,7 @@ cat /etc/letsencrypt/live/${CUSTOM_DOMAIN}/privkey-rsa.pem
 echo ""
 
 echo "Install certificate on App Engine"
-certificate_id=25661238
+certificate_id=26195706
 
 echo "Updating existing certificate"
 gcloud app ssl-certificates update "${certificate_id}" \
